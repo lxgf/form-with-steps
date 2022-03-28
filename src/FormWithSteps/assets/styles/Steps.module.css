@@ -1,0 +1,132 @@
+.step {
+    display: flex;
+    height: fit-content;
+}
+
+.rightBlock {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0;
+}
+
+.line {
+    display: flex;
+    justify-content: center;
+    background: #C2CFE0;
+    width: 2px;
+    margin-right: 1.375rem;
+}
+
+.line__check {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #F5F7FA;
+    border: 2px solid #C2CFE0;
+ }
+
+.line__pointer {
+    top: 1.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.line__counter {
+    font-size: .8rem;
+    font-weight: 600;
+    display: flex;
+    position: absolute;
+    margin: 0 auto;
+    user-select: none;
+    transition: .2s ease;
+}
+
+.line__check.check {
+    background: #F5F7FA url("/src/FormWithSteps/assets/images/check.svg") no-repeat center;
+}
+
+.line__check.check + .line__counter {
+    opacity: 0;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    color: #707683;
+    margin-bottom: 1rem;
+    height: 3rem;
+    justify-content: center;
+    gap: .5rem;
+    cursor: pointer;
+}
+
+.info__title {
+    font-weight: 700;
+}
+
+.info__addText {
+    font-size: 0.825rem;
+}
+
+.form {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 1.25rem;
+}
+
+.hidingData {
+    display: flex;
+    flex-direction: column;
+}
+
+.form>* {
+    margin-bottom: 0.4rem;
+    margin-right: 2rem;
+}
+
+.label {
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+    font-weight: 500;
+}
+
+.textInput {
+    padding: .3rem .6rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    width: 100%;
+    box-shadow: inset 0 2px 2px rgba(153, 166, 183, 0.2);
+    border-radius: 0.25rem;
+    border: 2px solid #C2CFE0;
+}
+
+.btn {
+    width: 9rem;
+    cursor: pointer;
+    padding: 0.6rem;
+    font-family: 'Montserrat', sans-serif;
+    background: #5E69DC linear-gradient(120deg, #7885F8 0%, #5C67DA 100%);
+    border: 1px solid #5E69DC;
+    border-radius: 0.25rem;
+    color: white;
+    transition: .2s ease-out;
+}
+
+.btn:hover {
+    background: transparent;
+    color: #5E69DC;
+}
+
+.errors {
+    font-size: .8rem;
+    margin-bottom: .6rem;
+    color: mediumvioletred;
+}
