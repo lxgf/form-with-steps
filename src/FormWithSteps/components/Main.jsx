@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import mainStyle from '../assets/styles/Main.module.css'
 import settingIcon from '../assets/images/setting.svg'
 import FullName from "./Steps/FullName";
+import PhoneNumber from "./Steps/PhoneNumber";
+import PlaceSelect from "./Steps/PlaceSelect";
 
 const Main = () => {
     const returnData = data => {
@@ -21,10 +23,7 @@ const Main = () => {
 
     let stepIndex = 0
 
-    const [showStatuses, setShowStatuses] = useState(
-        Array(3)
-            .fill(true)
-            .fill(false, 1)
+    const [showStatuses, setShowStatuses] = useState([true]
     )
 
     const showStep = index => {
@@ -53,14 +52,14 @@ const Main = () => {
                             switchStep={switchStep}
                             showStep={showStep}
                         />
-                        <FullName
+                        <PhoneNumber
                             returnData={returnData}
                             isShowed={showStatuses[stepIndex]}
                             index={stepIndex++}
                             switchStep={switchStep}
                             showStep={showStep}
                         />
-                        <FullName
+                        <PlaceSelect
                             returnData={returnData}
                             isShowed={showStatuses[stepIndex]}
                             index={stepIndex++}

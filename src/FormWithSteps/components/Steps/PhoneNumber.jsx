@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import stepsStyle from '../../assets/styles/Steps.module.css'
+import DataList from "../DataList";
+import dialCodes from '../../data/dialCodes.json'
 
-const FullName = ({returnData, index, isShowed, switchStep, showStep}) => {
+const PhoneNumber = ({returnData, index, isShowed, switchStep, showStep}) => {
     const [formData, setFormData] = useState({
-        name: '',
-        surname: ''
+        dialCode: '',
+        number: ''
     })
 
     const [errors, setErrors] = useState([])
@@ -13,25 +15,29 @@ const FullName = ({returnData, index, isShowed, switchStep, showStep}) => {
         const validation = () => {
             let tempErrors = []
 
-            if (formData.name.length < 2)
-                tempErrors.push('Длина имени меньше 2-х')
+            if (formData.number.length < 6)
+                tempErrors.push('Длина номера телефона меньше 6')
 
-            if (formData.surname.length < 2)
-                tempErrors.push('Длина фамилии меньше 2-х')
+            if (/[^0-9]/g.test(formData.number))
+                tempErrors.push('Номер должен содержаить только цифры')
 
-            if (/[^a-zA-Zа-яА-Я]/g.test(formData.name))
-                tempErrors.push('Имя должно содержаить только букы')
-
-            if (/[^a-zA-Zа-яА-Я]/g.test(formData.surname))
-                tempErrors.push('Фамилия должна содержаить только букы')
+            if (formData.dialCode.length === 0)
+                tempErrors.push('Нет кода страны')
 
             setErrors(tempErrors)
 
-            returnData(formData)
+            returnData({phoneNumber: (formData.dialCode + formData.number).slice(1)})
         }
 
         validation()
     }, [formData, returnData])
+
+    const getDialCode = countryDialInfo => {
+        setFormData(prevState => ({
+            dialCode: countryDialInfo.dial_code,
+            number: prevState.number
+        }))
+    }
 
     return (
         <div className={stepsStyle.step}>
@@ -46,7 +52,7 @@ const FullName = ({returnData, index, isShowed, switchStep, showStep}) => {
             <div className={stepsStyle.rightBlock}>
                 <div className={stepsStyle.info} onClick={() => {showStep(index)}}>
                     <div className={stepsStyle.info__title}>
-                        Полное имя
+                        Персональный номер телефона
                     </div>
                     {!isShowed &&
                         <div className={stepsStyle.info__addText}>
@@ -68,31 +74,32 @@ const FullName = ({returnData, index, isShowed, switchStep, showStep}) => {
                         }
                         <div className={stepsStyle.form}>
                             <label className={stepsStyle.label}>
-                                Имя
-                                <input
-                                    type="text"
-                                    className={stepsStyle.textInput}
-                                    value={formData.name}
-                                    maxLength="20"
-                                    onChange={e => {
-                                       setFormData(prevState => ({
-                                           name: e.target.value,
-                                           surname: prevState.surname
-                                       }))
-                                    }}/>
+                                Страна
+                                <DataList myValues={dialCodes} getValue={getDialCode}/>
                             </label>
                             <label className={stepsStyle.label}>
-                                Фамилия
+                                Код
                                 <input
                                     type="text"
-                                    className={stepsStyle.textInput}
-                                    value={formData.surname}
-                                    maxLength="30"
+                                    className={stepsStyle.textInput + ' ' + stepsStyle.minifiedTextInput + ' ' + stepsStyle.roTextInput}
+                                    value={formData.dialCode}
+                                    readOnly={true}
+                                    />
+                            </label>
+                            <label className={stepsStyle.label}>
+                                Поле номера
+                                <input
+                                    type="number"
+                                    className={stepsStyle.numberInput}
+                                    value={formData.number}
+                                    maxLength="18"
                                     onChange={e => {
-                                        setFormData(prevState => ({
-                                            name: prevState.name,
-                                            surname: e.target.value
-                                        }))
+                                        if (e.target.value.length < 15) {
+                                            setFormData(prevState => ({
+                                                dialCode: prevState.dialCode,
+                                                number: e.target.value
+                                            }))
+                                        }
                                     }}/>
                             </label>
                         </div>
@@ -110,4 +117,4 @@ const FullName = ({returnData, index, isShowed, switchStep, showStep}) => {
     );
 };
 
-export default FullName;
+export default PhoneNumber;

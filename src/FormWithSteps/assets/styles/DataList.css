@@ -1,0 +1,30 @@
+.datalist-input {
+    width: 8rem;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.autocomplete-input {
+    padding: 0.3rem 0.6rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    width: 100%;
+    box-shadow: inset 0 2px 2px rgb(153 166 183 / 20%);
+    border-radius: 0.25rem;
+    border: 2px solid #C2CFE0;
+}
+
+.datalist-items {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    max-height: 30vh;
+}
+
+.datalist-input .default-datalist-items div:not(.datalist-active-item) {
+    background: #fbfbfc;
+}
+
+.datalist-input .datalist-active-item-default {
+    background: #5F6ADD;
+}

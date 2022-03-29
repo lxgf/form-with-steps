@@ -45,7 +45,6 @@
     position: absolute;
     margin: 0 auto;
     user-select: none;
-    transition: .2s ease;
 }
 
 .line__check.check {
@@ -79,6 +78,7 @@
     display: flex;
     flex-wrap: wrap;
     margin-bottom: 1.25rem;
+    align-items: center;
 }
 
 .hidingData {
@@ -108,6 +108,17 @@
     border: 2px solid #C2CFE0;
 }
 
+.numberInput {
+    padding: .3rem .6rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    width: 100%;
+    box-shadow: inset 0 2px 2px rgba(153, 166, 183, 0.2);
+    border-radius: 0.25rem;
+    border: 2px solid #C2CFE0;
+    letter-spacing: 2px;
+}
+
 .btn {
     width: 9rem;
     cursor: pointer;
@@ -129,4 +140,24 @@
     font-size: .8rem;
     margin-bottom: .6rem;
     color: mediumvioletred;
+}
+
+.minifiedTextInput {
+    width: 5rem;
+    text-align: center;
+}
+
+.roTextInput {
+    outline: none;
+    cursor: default;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
 }
