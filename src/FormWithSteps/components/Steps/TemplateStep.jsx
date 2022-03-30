@@ -33,10 +33,10 @@ const TemplateStep = ({returnData, index, isShowed, switchStep, showStep}) => {
     }, [formData, returnData])
 
     return (
-        <div className={stepsStyle.step}>
+        <div className={stepsStyle.step + ' ' + (!isShowed ? stepsStyle.darkBg : '')}>
             <div className={stepsStyle.line}>
                 <div className={stepsStyle.line__pointer}>
-                    <div className={stepsStyle.line__check + ' ' + (errors.length === 0 && stepsStyle.check)}/>
+                    <div className={stepsStyle.line__check + ' ' + (errors.length === 0 ? stepsStyle.check : '')}/>
                     <span className={stepsStyle.line__counter}>
                         {index+1}
                     </span>

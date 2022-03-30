@@ -2,7 +2,7 @@ import React, {useMemo, useCallback } from "react";
 import DataListInput from "react-datalist-input";
 import '../assets/styles/DataList.css'
 
-const DataList = ({myValues, getValue}) => {
+const DataList = ({myValues, getValue, currentValue}) => {
     /**
      * your callback function gets called if the user selects one option out of the drop down menu
      * @param selectedItem object (the selected item / option)
@@ -31,6 +31,7 @@ const DataList = ({myValues, getValue}) => {
             placeholder="Выберать из списка"
             items={items}
             onSelect={onSelect}
+            value={currentValue}
         />
     );
 };

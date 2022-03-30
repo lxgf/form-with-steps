@@ -1,30 +1,49 @@
 import React, {useEffect, useState} from 'react';
 import stepsStyle from '../../assets/styles/Steps.module.css'
-import LocationSearchInput from "./LocationSearchInput";
+import DataList from "../DataList";
+import countries from '../../data/countries.json'
 
-const PlaceSelect = ({returnData, index, isShowed, switchStep, showStep}) => {
+
+const TemplateStep = ({returnData, index, isShowed, switchStep, showStep}) => {
     const [formData, setFormData] = useState({
-        name: '',
-        surname: ''
+        country: '',
+        state: '',
+        town: '',
+        street: '',
+        house: ''
     })
 
     const [errors, setErrors] = useState([])
+
+    const getCountry = country => {
+        setFormData(prevState => ({
+            country: country.name,
+            state: prevState.state,
+            town: prevState.town,
+            street: prevState.street,
+            house: prevState.house
+        }))
+    }
 
     useEffect(() => {
         const validation = () => {
             let tempErrors = []
 
-            // if (formData.name.length < 2)/*
-            //     tempErrors.push('Длина имени меньше 2-х')
-            //
-            // if (formData.surname.length < 2)
-            //     tempErrors.push('Длина фамилии меньше 2-х')
-            //
-            // if (/[^a-zA-Zа-яА-Я]/g.test(formData.name))
-            //     tempErrors.push('Имя должно содержаить только букы')
-            //
-            // if (/[^a-zA-Zа-яА-Я]/g.test(formData.surname))
-            //     tempErrors.push('Фамилия */должна содержаить только букы')
+            if (formData.country.length === 0)
+                tempErrors.push('Введите название страны')
+
+            if (formData.state.length < 2)
+                tempErrors.push('Длина назвагия области меньше 2-х')
+
+            if (formData.town.length < 2)
+                tempErrors.push('Длина назвагия города меньше 2-х')
+
+            if (formData.street.length < 5)
+                tempErrors.push('Длина назвагия улицы меньше 5-х')
+
+            if (formData.house.length === 0)
+                tempErrors.push('Введите номер дома')
+
 
             setErrors(tempErrors)
 
@@ -35,10 +54,10 @@ const PlaceSelect = ({returnData, index, isShowed, switchStep, showStep}) => {
     }, [formData, returnData])
 
     return (
-        <div className={stepsStyle.step}>
+        <div className={stepsStyle.step + ' ' + (!isShowed ? stepsStyle.darkBg : '')}>
             <div className={stepsStyle.line}>
                 <div className={stepsStyle.line__pointer}>
-                    <div className={stepsStyle.line__check + ' ' + (errors.length === 0 && stepsStyle.check)}/>
+                    <div className={stepsStyle.line__check + ' ' + (errors.length === 0 ? stepsStyle.check : '')}/>
                     <span className={stepsStyle.line__counter}>
                         {index+1}
                     </span>
@@ -47,7 +66,7 @@ const PlaceSelect = ({returnData, index, isShowed, switchStep, showStep}) => {
             <div className={stepsStyle.rightBlock}>
                 <div className={stepsStyle.info} onClick={() => {showStep(index)}}>
                     <div className={stepsStyle.info__title}>
-                        Место доставки
+                        Адрес досавки
                     </div>
                     {!isShowed &&
                         <div className={stepsStyle.info__addText}>
@@ -68,7 +87,78 @@ const PlaceSelect = ({returnData, index, isShowed, switchStep, showStep}) => {
                             </div>
                         }
                         <div className={stepsStyle.form}>
-                            <LocationSearchInput />
+                            <label className={stepsStyle.label}>
+                                Страна
+                                <DataList myValues={countries} getValue={getCountry} currentValue={formData.country} />
+                            </label>
+                            <label className={stepsStyle.label}>
+                                Область / Штат
+                                <input
+                                    type="text"
+                                    className={stepsStyle.textInput}
+                                    value={formData.state}
+                                    maxLength="35"
+                                    onChange={e => {
+                                        setFormData(prevState => ({
+                                            country: prevState.country,
+                                            state: e.target.value,
+                                            town: prevState.town,
+                                            street: prevState.street,
+                                            house: prevState.house
+                                        }))
+                                    }}/>
+                            </label>
+                            <label className={stepsStyle.label}>
+                                Город (населённый пункт)
+                                <input
+                                    type="text"
+                                    className={stepsStyle.textInput}
+                                    value={formData.town}
+                                    maxLength="25"
+                                    onChange={e => {
+                                        setFormData(prevState => ({
+                                            country: prevState.country,
+                                            state: prevState.state,
+                                            town: e.target.value,
+                                            street: prevState.street,
+                                            house: prevState.house
+                                        }))
+                                    }}/>
+                            </label>
+                            <label className={stepsStyle.label}>
+                                Улица
+                                <input
+                                    type="text"
+                                    className={stepsStyle.textInput}
+                                    value={formData.street}
+                                    maxLength="30"
+                                    onChange={e => {
+                                        setFormData(prevState => ({
+                                            country: prevState.country,
+                                            state: prevState.state,
+                                            town: prevState.town,
+                                            street: e.target.value,
+                                            house: prevState.house
+                                        }))
+                                    }}/>
+                            </label>
+                            <label className={stepsStyle.label}>
+                                Дом / строение
+                                <input
+                                    type="text"
+                                    className={stepsStyle.textInput}
+                                    value={formData.house}
+                                    maxLength="5"
+                                    onChange={e => {
+                                        setFormData(prevState => ({
+                                            country: prevState.country,
+                                            state: prevState.state,
+                                            town: prevState.town,
+                                            street: prevState.street,
+                                            house: e.target.value
+                                        }))
+                                    }}/>
+                            </label>
                         </div>
                         <button
                             className={stepsStyle.btn}
@@ -84,4 +174,4 @@ const PlaceSelect = ({returnData, index, isShowed, switchStep, showStep}) => {
     );
 };
 
-export default PlaceSelect;
+export default TemplateStep;
