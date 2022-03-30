@@ -23,7 +23,10 @@ const Main = () => {
 
     let stepIndex = 0
 
-    const [showStatuses, setShowStatuses] = useState([true]
+    const [showStatuses, setShowStatuses] = useState(
+        new Array(3)
+            .fill(true)
+            .fill(false, 1)
     )
 
     const showStep = index => {
