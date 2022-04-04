@@ -4,7 +4,7 @@ import DataList from "../DataList";
 import countries from '../../data/countries.json'
 
 
-const TemplateStep = ({returnData, index, isShowed, switchStep, showStep}) => {
+const TemplateStep = ({returnData, index, isShowed, switchStep, showStep, lastIndex}) => {
     const [formData, setFormData] = useState({
         country: '',
         state: '',
@@ -55,7 +55,7 @@ const TemplateStep = ({returnData, index, isShowed, switchStep, showStep}) => {
 
     return (
         <div className={stepsStyle.step + ' ' + (!isShowed ? stepsStyle.darkBg : '')}>
-            <div className={stepsStyle.line}>
+            <div className={stepsStyle.line + ' ' + (index === 0 ? stepsStyle.line_top : '') + (index === lastIndex ? stepsStyle.line_bottom : '')}>
                 <div className={stepsStyle.line__pointer}>
                     <div className={stepsStyle.line__check + ' ' + (errors.length === 0 ? stepsStyle.check : '')}/>
                     <span className={stepsStyle.line__counter}>
@@ -72,7 +72,7 @@ const TemplateStep = ({returnData, index, isShowed, switchStep, showStep}) => {
                         <div className={stepsStyle.info__addText}>
                             {errors.length === 0 ? <p>Все данные введены верно</p>
                                 :
-                                errors.map((error, errorIndex) => <p key={errorIndex}>{error} </p>)
+                                <p>Не заполнено</p>
                             }
                         </div>
                     }

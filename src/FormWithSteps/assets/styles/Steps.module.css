@@ -20,6 +20,20 @@
     background: #C2CFE0;
     width: 2px;
     margin-right: 1.375rem;
+    position: relative;
+}
+
+.line_top {
+    margin-top: 1.75rem;
+}
+
+.line_top > .line__pointer {
+    position: absolute;
+    top: 0;
+}
+
+.line_bottom {
+    height: 1.75rem;
 }
 
 .line__check {
@@ -39,7 +53,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
+    position: absolute;
     width: 1.5rem;
     height: 1.5rem;
 }
@@ -78,6 +92,7 @@
 
 .info__addText {
     font-size: 0.825rem;
+    height: 100%;
 }
 
 .form {

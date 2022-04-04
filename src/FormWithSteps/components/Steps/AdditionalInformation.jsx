@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import stepsStyle from '../../assets/styles/Steps.module.css'
 
-const AdditionalInformation = ({returnData, index, isShowed, switchStep, showStep}) => {
+const AdditionalInformation = ({returnData, index, isShowed, switchStep, showStep, lastIndex}) => {
     const [formData, setFormData] = useState({
         info: ''
     })
@@ -16,7 +16,7 @@ const AdditionalInformation = ({returnData, index, isShowed, switchStep, showSte
 
     return (
         <div className={stepsStyle.step + ' ' + (!isShowed ? stepsStyle.darkBg : '')}>
-            <div className={stepsStyle.line}>
+            <div className={stepsStyle.line + ' ' + (index === 0 ? stepsStyle.line_top : '') + (index === lastIndex ? stepsStyle.line_bottom : '')}>
                 <div className={stepsStyle.line__pointer}>
                     <div className={stepsStyle.line__check}/>
                     <span className={stepsStyle.line__counter}>

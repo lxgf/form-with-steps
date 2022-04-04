@@ -29,13 +29,15 @@ const Main = () => {
         } else {
             let emptyFieldsCount = 0
             for (const dataValue of Object.entries(allData)) {
-                if (dataValue === '') emptyFieldsCount++
+                if (dataValue[1] === '')
+                    emptyFieldsCount++
             }
 
             if (emptyFieldsCount === 0) {
                 setOlShowStatus(true)
                 console.log(allData)
-            }
+            } else
+                alert('Не все поля заполнены!')
         }
     }
 
@@ -77,6 +79,7 @@ const Main = () => {
                             index={stepIndex++}
                             switchStep={switchStep}
                             showStep={showStep}
+                            lastIndex={showStatuses.length-1}
                         />
                         <PhoneNumber
                             returnData={returnData}
@@ -84,6 +87,7 @@ const Main = () => {
                             index={stepIndex++}
                             switchStep={switchStep}
                             showStep={showStep}
+                            lastIndex={showStatuses.length-1}
                         />
                         <PlaceSelect
                             returnData={returnData}
@@ -91,6 +95,7 @@ const Main = () => {
                             index={stepIndex++}
                             switchStep={switchStep}
                             showStep={showStep}
+                            lastIndex={showStatuses.length-1}
                         />
                         <AdditionalInformation
                             returnData={returnData}
@@ -98,6 +103,7 @@ const Main = () => {
                             index={stepIndex++}
                             switchStep={switchStep}
                             showStep={showStep}
+                            lastIndex={showStatuses.length-1}
                         />
                     </div>
                 </div>
