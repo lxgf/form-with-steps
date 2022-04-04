@@ -15,10 +15,11 @@ const PhoneNumber = ({returnData, index, isShowed, switchStep, showStep}) => {
         const validation = () => {
             let tempErrors = []
 
+
             if (formData.number.length < 6)
                 tempErrors.push('Длина номера телефона меньше 6')
 
-            if (/[^0-9]/g.test(formData.number))
+            if (!/^\d+$/.test(formData.number))
                 tempErrors.push('Номер должен содержаить только цифры')
 
             if (formData.dialCode.length === 0)
